@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+	"os"
 )
 
 func init() {
@@ -18,6 +19,23 @@ const (
 	Ascii = Alphabet + Numerals + "~!@#$%^&*()-_+={}[]\\|<,>.?/\"';:`"
 
 )
+
+func createFile(p string) *os.File {
+	f, err := os.Create(p)
+	if err != nil {
+		panic(err)
+	}
+	return f
+}
+
+func writeFile(f *os.File, randString string) {
+	fmt.Fprintln(f, randString)
+}
+
+func closeFile(f *os.File) {
+	fmt.Println("closing")
+	f.Close()
+}
 
 func randomKeyGenerator(characterNumber int,filterValue int) string {
 	b := make([]byte, characterNumber)
@@ -105,8 +123,19 @@ func main(){
 	fmt.Println("1 Karakter kac karaktere denk dussun ? e.g  w = 1asd1  1 e 4 gibi  Default = 2")
 	fmt.Scanf("%d", &characterNumber)
 
-	//-------TEST------
-	fmt.Println("\n\n")
-	fmt.Println(randomKeyGenerator(characterNumber,filterValue))
+	// File Name
+	t := time.Now()
+	formatedTime := t.Format(time.RFC1123)//Time to String
 
+	// Create File
+	file := createFile("/home/bilal/Desktop/"+formatedTime+".key")
+	defer closeFile(file)
+
+	// Write File
+	j:=0
+	for j < len(Ascii) {
+		randString := randomKeyGenerator(characterNumber,filterValue)
+		writeFile(file, randString)
+		j++
+	}
 }
