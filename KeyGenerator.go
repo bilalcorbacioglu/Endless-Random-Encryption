@@ -11,12 +11,13 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-//var alphabets = []bytes("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+var readLine [len(Ascii)+1]string
+
 const (
 	Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	Numerals = "0123456789"
 	Special = "~!@#$%^&*()-_+={}[]\\|<,>.?/\"';:`"
-	Ascii = Alphabet + Numerals + "~!@#$%^&*()-_+={}[]\\|<,>.?/\"';:`"
+	Ascii = Alphabet + Numerals + Special
 
 )
 
@@ -133,7 +134,7 @@ func main(){
 
 	// Write File
 	j:=0
-	for j < len(Ascii) {
+	for j < len(Ascii)+1 {
 		randString := randomKeyGenerator(characterNumber,filterValue)
 		writeFile(file, randString)
 		j++
