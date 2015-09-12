@@ -11,12 +11,13 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-//var alphabets = []bytes("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+var readLine [len(Ascii)+1]string
+
 const (
 	Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	Numerals = "0123456789"
 	Special = "~!@#$%^&*()-_+={}[]\\|<,>.?/\"';:`"
-	Ascii = Alphabet + Numerals + "~!@#$%^&*()-_+={}[]\\|<,>.?/\"';:`"
+	Ascii = Alphabet + Numerals + Special
 
 )
 
@@ -90,11 +91,10 @@ func randomKeyGenerator(characterNumber int,filterValue int) string {
 }
 
 func filter(filterValue int) int {
-	//temp := 0
-	//i := 0
-	//var question [3]string
+	temp := 0
+	i := 0
+	var question [3]string
 	fmt.Println("Olsun diyorsan 1, olmasin diyorsan 0 gir")
-	/*
 	question[0] = "Harf olsun mu ?"
 	question[1] = "Sayi olsun mu ?"
 	question[2] = "Ozel Karakter olsun mu ?"
@@ -112,28 +112,23 @@ func filter(filterValue int) int {
 			}
 		}
 		i++
-	}*/
-	filterValue = 7
+	}
+
 	return filterValue
 }
 
 func main(){
-	filterValue := 0
-	filterValue = filter(filterValue)
+	filterValue := 7
+	//filterValue = filter(filterValue)
 	characterNumber := 2
-	fmt.Println("1 Karakter kac karaktere denk dussun ? e.g  w = 1asd1  1 e 4 gibi  Default = 2")
-
-	// File Name
-	t := time.Now()
-	formatedTime := t.Format(time.RFC1123)//Time to String
 
 	// Create File
-	file := createFile("./"+formatedTime+".key")
+	file := createFile("./1.key")
 	defer closeFile(file)
 
 	// Write File
 	j:=0
-	for j < len(Ascii) {
+	for j < len(Ascii)+1 {
 		randString := randomKeyGenerator(characterNumber,filterValue)
 		writeFile(file, randString)
 		j++
