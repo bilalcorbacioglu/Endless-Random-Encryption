@@ -4,5 +4,5 @@ go:
 
 script:
   - cd Test
-  - go build EndlessRandom.go 
+  - go run EndlessRandom.go 
   - ./EndlessRandom
