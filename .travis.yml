@@ -4,5 +4,7 @@ go:
 
 script:
   - cd Test
-  - go build EndlessRandom.go 
-  - ./EndlessRandom
+  - go build KeyGenerator.go 
+  - ./KeyGenerator
+  - go build CyptoToFile.go 
+  - ./CyptoToFile
