@@ -11,14 +11,11 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-var readLine [len(Ascii)+1]string
-
 const (
 	Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	Numerals = "0123456789"
 	Special = "~!@#$%^&*()-_+={}[]\\|<,>.?/\"';:`"
 	Ascii = Alphabet + Numerals + Special
-
 )
 
 func createFile(p string) *os.File {

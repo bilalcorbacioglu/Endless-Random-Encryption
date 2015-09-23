@@ -47,7 +47,6 @@ func convertLine(txtpath string){
 		for j < len(Ascii){
 			if Ascii[j] == string(dat)[i] {
 				io.WriteString(file, readKeyLine[j] )
-				//writeFile(file, readKeyLine[j], )
 				j = len(Ascii)+1
 			}
 			j++
